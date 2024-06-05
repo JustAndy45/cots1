@@ -27,7 +27,7 @@ public class gemini {
             System.out.println("Hasil: " + hasil);
         }
     }
-
+ 
     static double calculate(double nilai1, char operator, double nilai2) {
         switch (operator) {
             case '+':
