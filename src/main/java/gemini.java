@@ -8,42 +8,44 @@ import java.util.Scanner;
 public class gemini {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-
-        System.out.print("Masukkan nilai pertama: ");
-        double nilai1 = input.nextDouble();
-        System.out.print("Pilih operator (+, -, *, /): ");
-        char operator = input.next().charAt(0);
-        System.out.print("Masukkan nilai kedua: ");
-        double nilai2 = input.nextDouble();
-
-        double hasil = calculate(nilai1, operator, nilai2);
-
-        if (Double.isNaN(hasil)) {
-            System.out.println("Pembagi tidak boleh 0!");
-        } else if (Double.isInfinite(hasil)) {
-            System.out.println("Operator tidak valid!");
-        } else {
-            System.out.println("Hasil: " + hasil);
+        Scanner s = new Scanner(System.in);
+    
+        System.out.print("Input pertama: ");
+        double a = s.nextDouble();
+        System.out.print("Pilih operasi (+, -, *, /): ");
+        char op = s.next().charAt(0);
+        System.out.print("Input kedua: ");
+        double b = s.nextDouble();
+    
+        double r = 0;
+        boolean error = false;
+    
+        try {
+            if (op == '+') {
+                r = a + b;
+            } else if (op == '-') {
+                r = a - b;
+            } else if (op == '*') {
+                r = a * b;
+            } else if (op == '/') {
+                if (b != 0) {
+                    r = a / b;
+                } else {
+                    System.out.println("Pembagi 0!");
+                    error = true;
+                }
+            } else {
+                System.out.println("Operasi salah!");
+                error = true;
+            }
+    
+            if (!error) {
+                System.out.println("Hasil: " + r);
+            }
+        } catch (Exception e) {
+            System.out.println("Error terjadi!");
         }
     }
 
-    static double calculate(double nilai1, char operator, double nilai2) {
-        switch (operator) {
-            case '+':
-                return nilai1 + nilai2;
-            case '-':
-                return nilai1 - nilai2;
-            case '*':
-                return nilai1 * nilai2;
-            case '/':
-                if (nilai2 != 0) {
-                    return nilai1 / nilai2;
-                } else {
-                    throw new IllegalArgumentException("Pembagi tidak boleh 0!");
-                }
-            default:
-                throw new IllegalArgumentException("Operator tidak valid!");
-        }
     }
 }
